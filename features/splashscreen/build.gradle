@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.grumpyshoe.beertastic.features.splashscreen'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        minSdk min_sdk
+        targetSdk target_sdk
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion kotlin_compiler_version
+    }
+}
+
+dependencies {
+
+    // Modules
+    implementation project(':common:navigation')
+    implementation project(':common:resources')
+    implementation project(':common:ui')
+
+    // Compose
+    implementation platform(compose_bom)
+    implementation compose_ui
+    implementation compose_ui_graphics
+    implementation compose_ui_tooling
+    implementation material3
+
+    // Accompanist
+    implementation accompanist_navigation_animation
+
+    // Dependency injection
+    implementation hilt_android
+    kapt hilt_compiler
+    implementation hilt_navigation_compose
+
+    // Tests
+    testImplementation junit
+}

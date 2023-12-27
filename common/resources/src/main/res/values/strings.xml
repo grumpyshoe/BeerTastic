@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">BeerTastic</string>
+    <string name="splashscreen_title">BeerTastic</string>
+    <string name="home_loading_text">Preparing data…</string>
+    <string name="home_loading_error">Oops, an error occurred during loading. Please try again later</string>
+    <string name="home_empty_data">No date found</string>
+    <string name="details_section_general">General Information</string>
+    <string name="details_section_entry_first_brewed">First brewed</string>
+    <string name="details_section_entry_abv">Alcohol By Volume (ABV)</string>
+    <string name="details_section_entry_ibu">International Bitterness Unit (IBU)</string>
+    <string name="details_section_entry_targetFG">Target Final Gravity (FG)</string>
+    <string name="details_section_entry_targetOG">Target Original Gravity (OG)</string>
+    <string name="details_section_entry_ebc">European Brewery Convention (EBC)</string>
+    <string name="details_section_entry_srm">Standard Reference Method (SRM)</string>
+    <string name="details_section_entry_ph">Potential Of Hydrogen (PH)</string>
+    <string name="details_section_entry_attenuationLevel">Attenuation Level</string>
+    <string name="details_section_entry_volume">Volume</string>
+    <string name="details_section_entry_boilVolume">Boil Volume</string>
+    <string name="details_section_method">Method</string>
+    <string name="details_section_ingredients">Ingredients</string>
+    <string name="details_section_food_pairing">Food Pairing</string>
+    <string name="details_section_brewer_tips">Brewer Tips</string>
+    <string name="details_section_contributed_by">Contributed By</string>
+    <string name="home_section_favorites">My Favorites</string>
+    <string name="home_section_all_beers">Overview</string>
+    <string name="splashscreen_showcase_text">A showcase app made by</string>
+    <string name="splashscreen_author">Thomas Cirksena</string>
+</resources>

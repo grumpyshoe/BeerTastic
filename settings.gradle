@@ -1,0 +1,36 @@
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "BeerTastic"
+include ':app'
+include ':common'
+include ':common:navigation'
+include ':common:resources'
+include ':common:ui'
+include ':common:coroutines'
+include ':common:result'
+include ':data'
+include ':data:source'
+include ':data:source:preferences'
+include ':data:source:network'
+include ':data:repository'
+include ':domain'
+include ':domain:beer'
+include ':features'
+include ':features:splashscreen'
+include ':features:home'
+include ':features:details'

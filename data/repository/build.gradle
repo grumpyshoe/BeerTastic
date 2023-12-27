@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.grumpyshoe.beertastic.data.repository'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        minSdk min_sdk
+        targetSdk target_sdk
+    }
+}
+
+dependencies {
+
+    // Modules
+    implementation project(':common:result')
+    implementation project(':common:coroutines')
+    //implementation project(':data:source:database')
+    implementation project(':data:source:network')
+    implementation project(':data:source:preferences')
+    implementation project(':domain:beer')
+
+    // Dependency injection
+    implementation hilt_android
+    kapt hilt_compiler
+
+    // Tests
+    testImplementation junit
+    debugImplementation ui_test_manifest
+}

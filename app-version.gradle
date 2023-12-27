@@ -1,0 +1,26 @@
+static def generateVersionCode() {
+    def version = "git rev-list --count HEAD".execute().text.trim()
+    def code = Integer.parseInt(version)+37
+    println("--> versionCode: $code")
+    code
+}
+
+static def generateVersionName() {
+    def versionName = "1.0.0 (${getCommitHashCode()})"
+    println("--> versionName: $versionName")
+    versionName
+}
+
+static def getBranch() {
+    def branch = "git name-rev --name-only ${getCommitHashCode()}".execute().text.trim()
+    System.getenv("BRANCH_NAME") ?: branch.contains("main") ? "main" : branch.contains("dev") ? "dev" : branch
+}
+
+static def getCommitHashCode() {
+    "git rev-parse --short HEAD".execute().text.trim()
+}
+
+ext {
+    version_code = generateVersionCode()
+    version_name = generateVersionName()
+}
