@@ -16,7 +16,7 @@ This encapsulation reduces the build time as unchanged modules can be loaded fro
 
 # More about me
 
-Name	 : Thomas Cirksena
-Email    : thomas.cirksena@gmail.com
-Github   : https://github.com/grumpyshoe
-LinkedIn : www.linkedin.com/in/thomas-cirksena
+Name	 : Thomas Cirksena  
+Email    : thomas.cirksena@gmail.com  
+Github   : https://github.com/grumpyshoe  
+LinkedIn : www.linkedin.com/in/thomas-cirksena  
