@@ -1,7 +1,7 @@
 
 # Introduction
 
-The app BeerTastic is a showcase app, designed to demonstrate how I create scalable and maintainable projects.
+The app `BeerTastic` is a showcase app, designed to demonstrate how I create scalable and maintainable projects.
 
 # App content
 
