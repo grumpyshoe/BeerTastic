@@ -26,13 +26,7 @@ The project is structured according to the `clean architecture` pattern, so that
 
 For the communication between UI & data the MVVM pattern was used to achieve a clear differentiation of responsibilities. The UI elements themselves were implemented in compose.
 
-More about me
-
-Name	 : Thomas Cirksena  
-Email    : thomas.cirksena@gmail.com  
-Github   : https://github.com/grumpyshoe  
-LinkedIn : www.linkedin.com/in/thomas-cirksena  
-
+# More about me
 
 Name	 : Thomas Cirksena  
 Email    : thomas.cirksena@gmail.com  
