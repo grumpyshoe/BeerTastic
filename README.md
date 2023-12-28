@@ -1,3 +1,16 @@
+<h1 align="center">BeerTastic</h1>
+
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/License-MIT-purple.svg"/></a>
+  <a href="https://android-arsenal.com/api?level=26"><img alt="API" src="https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat"/></a>
+  <a href="https://github.com/grumpyshoe/BeerTastic/actions"><img alt="Build Status" src="https://github.com/grumpyshoe/BeerTastic/workflows/Android%20CI/badge.svg"/></a> 
+</p>
+
+<div float="left">
+<img src="/preview/splashscreen.jpg"  width="24%"/>
+<img src="/preview/beerOverview.jpg"  width="24%"/>
+<img src="/preview/beerDetails.jpg"  width="24%"/>
+</div>
 
 # Introduction
 
