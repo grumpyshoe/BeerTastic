@@ -9,7 +9,7 @@ ext {
     hilt_navigation_compose_version = '1.0.0'
     junit_version = '4.13.2'
     compose_bom_version = '2022.11.00'
-    android_gradle_plugin_version = '8.1.4'
+    android_gradle_plugin_version = '8.2.0'
     kotlin_version = '1.7.10'
     ktlint_version = '11.0.0'
     ksp_version = '1.7.10-1.0.6'
