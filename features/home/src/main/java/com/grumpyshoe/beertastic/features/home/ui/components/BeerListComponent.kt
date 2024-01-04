@@ -122,37 +122,36 @@ private fun BeerUIItemView(
                 containerColor = MaterialTheme.colorScheme.surface
             )
         ) {
-            Box(modifier = Modifier.padding(vertical = 8.dp)) {
-                ListItem(
-                    modifier = Modifier
-                        .clickable {
-                            showDetails(beerItem.id)
-                        },
-                    leadingContent = {
-                        Box(
-                            modifier = Modifier.size(56.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            AsyncImage(
-                                model = ImageRequest.Builder(LocalContext.current)
-                                    .data(beerItem.imageUrl)
-                                    .crossfade(true)
-                                    .build(),
-                                contentDescription = beerItem.name,
-                            )
-                        }
-                    },
-                    headlineText = {
-                        Text(text = beerItem.name)
-                    },
-                    supportingText = {
-                        Text(beerItem.tagline)
-                    },
-                    colors = ListItemDefaults.colors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
+            ListItem(
+                modifier = Modifier
+                    .clickable {
+                        showDetails(beerItem.id)
+                    }
+                    .padding(vertical = 8.dp),
+                leadingContent = {
+                    Box(
+                        modifier = Modifier.size(56.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(beerItem.imageUrl)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = beerItem.name,
+                        )
+                    }
+                },
+                headlineText = {
+                    Text(text = beerItem.name)
+                },
+                supportingText = {
+                    Text(beerItem.tagline)
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surface
                 )
-            }
+            )
         }
     }
 }
