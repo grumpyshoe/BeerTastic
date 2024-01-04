@@ -101,7 +101,6 @@ internal fun SplashScreen() {
                 text = stringResource(R.string.splashscreen_author),
                 textAlign = TextAlign.Center
             )
-
         }
     }
 }

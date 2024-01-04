@@ -26,7 +26,7 @@ class HomeViewModelTest {
     private lateinit var getFavorites: FakeGetFavorites
     private val testDispatcher = UnconfinedTestDispatcher()
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var sut: HomeViewModel
 
     @Before
     fun setup() {
@@ -36,7 +36,7 @@ class HomeViewModelTest {
     }
 
     private fun initViewModel() {
-        viewModel = HomeViewModel(
+        sut = HomeViewModel(
             getBeers = getBeers,
             getBeerById = getBeerById,
             getFavorites = getFavorites,
@@ -54,7 +54,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.viewState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.viewState.take(1).lastOrNull() }
         assertTrue(actual is BeerDataState.DataLoaded)
     }
 
@@ -68,7 +68,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerList.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerList.take(1).lastOrNull() }
         assertEquals(3, actual?.size)
     }
 
@@ -93,7 +93,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerList.take(1).lastOrNull()?.firstOrNull() }
+        val actual = runBlocking { sut.beerList.take(1).lastOrNull()?.firstOrNull() }
         assertEquals(99, actual?.id)
         assertEquals("beer_123", actual?.name)
         assertEquals("tag 1", actual?.tagline)
@@ -117,7 +117,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerList.take(1).lastOrNull()?.firstOrNull() }
+        val actual = runBlocking { sut.beerList.take(1).lastOrNull()?.firstOrNull() }
         assertEquals(53, actual?.shortDescription?.length)
     }
 
@@ -131,7 +131,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.viewState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.viewState.take(1).lastOrNull() }
         assertTrue(actual is BeerDataState.Error)
     }
 
@@ -158,7 +158,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // trigger action
-        viewModel.loadMoreData()
+        sut.loadMoreData()
 
         // check assertions
         assertEquals(2, getBeers.requestedPage)
@@ -175,7 +175,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerList.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerList.take(1).lastOrNull() }
         assertEquals(2, actual?.size)
         assertTrue(actual?.map { it.id }?.contains(fakeBeer.id) == false)
     }
@@ -190,7 +190,7 @@ class HomeViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.favorites.take(1).lastOrNull() }
+        val actual = runBlocking { sut.favorites.take(1).lastOrNull() }
         assertEquals(1, actual?.size)
         assertTrue(actual?.map { it.id }?.contains(fakeBeer.id) == true)
     }
