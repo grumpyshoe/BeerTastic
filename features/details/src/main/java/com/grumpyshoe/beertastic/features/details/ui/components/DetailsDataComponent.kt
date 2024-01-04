@@ -29,7 +29,6 @@ import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
 import com.grumpyshoe.beertastic.features.details.ui.uimodel.BeerDetailUIItem
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 
-
 @Composable
 internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
     val scrollSate = rememberScrollState()

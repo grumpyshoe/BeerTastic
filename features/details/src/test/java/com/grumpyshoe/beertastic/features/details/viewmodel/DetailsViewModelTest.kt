@@ -29,7 +29,7 @@ class DetailsViewModelTest {
     private lateinit var setIsBeerFavorite: SetIsBeerFavorite
     private val testDispatcher = UnconfinedTestDispatcher()
 
-    private lateinit var viewModel: DetailsViewModel
+    private lateinit var sut: DetailsViewModel
 
     @Before
     fun setup() {
@@ -39,7 +39,7 @@ class DetailsViewModelTest {
     }
 
     private fun initViewModel(beerId: Int = 1) {
-        viewModel = DetailsViewModel(
+        sut = DetailsViewModel(
             savedStateHandle = SavedStateHandle().also {
                 it[BEER_ID] = "$beerId"
             },
@@ -73,7 +73,7 @@ class DetailsViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerDetailsDataState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerDetailsDataState.take(1).lastOrNull() }
         assertTrue(actual is BeerDetailsDataState.DataLoaded)
     }
 
@@ -87,7 +87,7 @@ class DetailsViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerDetailsDataState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerDetailsDataState.take(1).lastOrNull() }
         assertTrue(actual is BeerDetailsDataState.Error)
     }
 
@@ -101,7 +101,7 @@ class DetailsViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerDetailsDataState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerDetailsDataState.take(1).lastOrNull() }
         val isFavorite = (actual as BeerDetailsDataState.DataLoaded).isFavorite
         assertFalse(isFavorite)
     }
@@ -116,7 +116,7 @@ class DetailsViewModelTest {
         initViewModel()
 
         // check assertions
-        val actual = runBlocking { viewModel.beerDetailsDataState.take(1).lastOrNull() }
+        val actual = runBlocking { sut.beerDetailsDataState.take(1).lastOrNull() }
         val isFavorite = (actual as BeerDetailsDataState.DataLoaded).isFavorite
         assertTrue(isFavorite)
     }
