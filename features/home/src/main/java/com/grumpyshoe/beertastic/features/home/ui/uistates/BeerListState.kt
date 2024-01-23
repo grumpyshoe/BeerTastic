@@ -1,7 +1,8 @@
-package com.grumpyshoe.beertastic.features.home.ui.components
+package com.grumpyshoe.beertastic.features.home.ui.uistates
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,22 +34,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
+import com.grumpyshoe.beertastic.features.home.ui.components.RandomBeer
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerUIItem
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-internal fun BeerListComponent(
+internal fun BeerListState(
     favorites: List<BeerUIItem>?,
     beerList: List<BeerUIItem>,
     loadMoreData: () -> Unit,
-    showDetails: (Int) -> Unit
+    showDetails: (Int) -> Unit,
+    randomBeer: BeerUIItem?,
+    showRandomBeer: () -> Unit
 ) {
     var loading by remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
@@ -70,6 +76,16 @@ internal fun BeerListComponent(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
     ) {
+
+        item {
+            RandomBeer(
+                randomBeer = randomBeer,
+                showRandomBeer = showRandomBeer,
+                showDetails = showDetails
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+        }
 
         if (!favorites.isNullOrEmpty()) {
 
@@ -133,13 +149,31 @@ private fun BeerUIItemView(
                         modifier = Modifier.size(56.dp),
                         contentAlignment = Alignment.Center,
                     ) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(beerItem.imageUrl)
-                                .crossfade(true)
-                                .build(),
-                            contentDescription = beerItem.name,
-                        )
+                        if (beerItem.imageUrl == null) {
+                            Box(
+                                modifier = Modifier
+                                    .size(96.dp)
+                                    .background(
+                                        MaterialTheme.colorScheme.primary.copy(alpha = .3f),
+                                        shape = CircleShape
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Image(
+                                    modifier = Modifier.size(32.dp),
+                                    painter = painterResource(id = R.drawable.questionmark),
+                                    contentDescription = null
+                                )
+                            }
+                        } else {
+                            AsyncImage(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(beerItem.imageUrl)
+                                    .crossfade(true)
+                                    .build(),
+                                contentDescription = beerItem.name,
+                            )
+                        }
                     }
                 },
                 headlineText = {
@@ -170,7 +204,7 @@ private fun SectionHeadline(@StringRes text: Int) {
 private fun BeerListComponentPreview() {
     AppNameTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            BeerListComponent(
+            BeerListState(
                 favorites = listOf(
                     BeerUIItem(
                         id = 3,
@@ -191,6 +225,8 @@ private fun BeerListComponentPreview() {
                     )
                 },
                 loadMoreData = {},
+                randomBeer = null,
+                showRandomBeer = {}
             )
         }
     }

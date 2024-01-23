@@ -1,24 +1,30 @@
 package com.grumpyshoe.beertastic.features.details.ui.components
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -62,13 +68,41 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
             contentAlignment = Alignment.Center
         ) {
 
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(beerDetails.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = beerDetails.name,
-            )
+            if (beerDetails.imageUrl == null) {
+                Box(
+                    modifier = Modifier
+                        .size(120.dp)
+                        .aspectRatio(1f)
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = .3f), shape = CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    Box(
+                        modifier = Modifier.size(72.dp),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Image(
+                            modifier = Modifier.size(70.dp),
+                            contentScale = ContentScale.Crop,
+                            painter = painterResource(id = R.drawable.questionmark),
+                            contentDescription = null
+                        )
+                    }
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = .3f), shape = CircleShape)
+                )
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(beerDetails.imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = beerDetails.name,
+                )
+            }
         }
 
         Text(
@@ -91,53 +125,56 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
         )
         SectionEntry(
             label = R.string.details_section_entry_abv,
-            value = beerDetails.abv
+            value = beerDetails.abv ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_ibu,
-            value = beerDetails.ibu
+            value = beerDetails.ibu ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_targetFG,
-            value = beerDetails.targetFG
+            value = beerDetails.targetFG ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_targetOG,
-            value = beerDetails.targetOG
+            value = beerDetails.targetOG ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_ebc,
-            value = beerDetails.ebc
+            value = beerDetails.ebc ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_srm,
-            value = beerDetails.srm
+            value = beerDetails.srm ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_ph,
-            value = beerDetails.ph
+            value = beerDetails.ph ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_attenuationLevel,
-            value = beerDetails.attenuationLevel
+            value = beerDetails.attenuationLevel ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_volume,
-            value = beerDetails.volume
+            value = beerDetails.volume ?: "-"
         )
         SectionEntry(
             label = R.string.details_section_entry_boilVolume,
-            value = beerDetails.boilVolume
+            value = beerDetails.boilVolume ?: "-"
         )
 
         Spacer(modifier = Modifier.heightIn(24.dp))
 
-        SectionHeadline(R.string.details_section_method)
+        if (!beerDetails.method.isNullOrEmpty()) {
 
-        Spacer(modifier = Modifier.heightIn(8.dp))
+            SectionHeadline(R.string.details_section_method)
 
-        beerDetails.method.forEach { entry ->
-            SectionEntry(value = entry)
+            Spacer(modifier = Modifier.heightIn(8.dp))
+
+            beerDetails.method.forEach { entry ->
+                SectionEntry(value = entry)
+            }
         }
 
         Spacer(modifier = Modifier.heightIn(24.dp))
@@ -146,9 +183,9 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
 
         Spacer(modifier = Modifier.heightIn(8.dp))
 
-        beerDetails.ingredients.forEach { entry ->
+        beerDetails.ingredients?.forEach { entry ->
             SectionEntry(value = entry)
-        }
+        } ?: SectionEntry(value = "-")
 
         Spacer(modifier = Modifier.heightIn(24.dp))
 
@@ -156,9 +193,9 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
 
         Spacer(modifier = Modifier.heightIn(8.dp))
 
-        beerDetails.foodPairing.forEach { entry ->
+        beerDetails.foodPairing?.forEach { entry ->
             SectionEntry(value = entry)
-        }
+        } ?: SectionEntry(value = "-")
 
         Spacer(modifier = Modifier.heightIn(24.dp))
 
@@ -166,7 +203,7 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
 
         Spacer(modifier = Modifier.heightIn(8.dp))
 
-        SectionEntry(value = beerDetails.brewersTips)
+        SectionEntry(value = beerDetails.brewersTips ?: "-")
 
         Spacer(modifier = Modifier.heightIn(24.dp))
 
@@ -174,7 +211,7 @@ internal fun DetailsDataComponent(beerDetails: BeerDetailUIItem) {
 
         Spacer(modifier = Modifier.heightIn(8.dp))
 
-        SectionEntry(value = beerDetails.contributedBy)
+        SectionEntry(value = beerDetails.contributedBy ?: "-")
     }
 }
 

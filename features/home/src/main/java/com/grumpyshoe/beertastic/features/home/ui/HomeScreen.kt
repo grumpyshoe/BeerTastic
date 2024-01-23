@@ -16,11 +16,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
-import com.grumpyshoe.beertastic.features.home.ui.components.BeerListComponent
-import com.grumpyshoe.beertastic.features.home.ui.components.ErrorComponent
-import com.grumpyshoe.beertastic.features.home.ui.components.LoadingComponent
+import com.grumpyshoe.beertastic.features.home.ui.uistates.ErrorState
+import com.grumpyshoe.beertastic.features.home.ui.uistates.LoadingState
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerDataState
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerUIItem
+import com.grumpyshoe.beertastic.features.home.ui.uistates.BeerListState
 import com.grumpyshoe.beertastic.features.home.viewmodel.HomeViewModel
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 
@@ -33,6 +33,7 @@ internal fun HomeRoute(
 
     val beerList by viewModel.beerList.collectAsState(null)
     val favorites by viewModel.favorites.collectAsState(null)
+    val randomBeer by viewModel.randomBeer.collectAsState(null)
 
     HomeScreen(
         beerDataState = viewState,
@@ -40,6 +41,8 @@ internal fun HomeRoute(
         beerList = beerList ?: emptyList(),
         loadMoreData = viewModel::loadMoreData,
         showDetails = showDetails,
+        randomBeer = randomBeer,
+        showRandomBeer = viewModel::showRandomBeer
     )
 }
 
@@ -51,6 +54,8 @@ private fun HomeScreen(
     beerList: List<BeerUIItem>,
     loadMoreData: () -> Unit,
     showDetails: (Int) -> Unit,
+    randomBeer: BeerUIItem?,
+    showRandomBeer: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -63,18 +68,20 @@ private fun HomeScreen(
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
             )
-        },
+        }
     ) { paddingValues ->
 
         Box(modifier = Modifier.padding(paddingValues)) {
             when (beerDataState) {
-                is BeerDataState.Loading -> LoadingComponent()
-                is BeerDataState.Error -> ErrorComponent()
-                is BeerDataState.DataLoaded -> BeerListComponent(
+                is BeerDataState.Loading -> LoadingState()
+                is BeerDataState.Error -> ErrorState()
+                is BeerDataState.DataLoaded -> BeerListState(
                     favorites = favorites,
                     beerList = beerList,
                     loadMoreData = loadMoreData,
-                    showDetails = showDetails
+                    showDetails = showDetails,
+                    randomBeer = randomBeer,
+                    showRandomBeer = showRandomBeer
                 )
             }
         }
@@ -91,6 +98,8 @@ private fun HomeScreenLoadingPreview() {
             beerDataState = BeerDataState.Loading,
             showDetails = {},
             loadMoreData = {},
+            showRandomBeer = {},
+            randomBeer = null
         )
     }
 }
@@ -105,6 +114,8 @@ private fun HomeScreenErrorPreview() {
             beerDataState = BeerDataState.Error(),
             showDetails = {},
             loadMoreData = {},
+            showRandomBeer = {},
+            randomBeer = null
         )
     }
 }
@@ -135,6 +146,8 @@ private fun HomeScreenBeerOverviewPreview() {
             beerDataState = BeerDataState.DataLoaded(),
             showDetails = {},
             loadMoreData = {},
+            showRandomBeer = {},
+            randomBeer = null
         )
     }
 }

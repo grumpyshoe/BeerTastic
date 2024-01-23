@@ -60,21 +60,21 @@ class DetailsViewModel @Inject constructor(
                         description = beer.description,
                         imageUrl = beer.imageUrl,
                         firstBrewed = beer.firstBrewed,
-                        abv = beer.abv.toString(),
-                        ibu = beer.ibu.toString(),
-                        targetFG = beer.targetFG.toString(),
-                        targetOG = beer.targetOG.toString(),
-                        ebc = beer.ebc.toString(),
-                        srm = beer.srm.toString(),
-                        attenuationLevel = beer.attenuationLevel.toString(),
-                        volume = beer.volume.let {
+                        abv = beer.abv?.toString(),
+                        ibu = beer.ibu?.toString(),
+                        targetFG = beer.targetFG?.toString(),
+                        targetOG = beer.targetOG?.toString(),
+                        ebc = beer.ebc?.toString(),
+                        srm = beer.srm?.toString(),
+                        attenuationLevel = beer.attenuationLevel?.toString(),
+                        volume = beer.volume?.let {
                             "${it.value} ${it.unit}"
                         },
-                        ph = beer.ph.toString(),
-                        boilVolume = beer.boilVolume.let {
+                        ph = beer.ph?.toString(),
+                        boilVolume = beer.boilVolume?.let {
                             "${it.value} ${it.unit}"
                         },
-                        method = beer.method.let {
+                        method = beer.method?.let {
                             val mash = it.mashTemp.map { item ->
                                 "Mash - ${item.temp.value}° ${item.temp.unit}"
                             }
@@ -83,19 +83,28 @@ class DetailsViewModel @Inject constructor(
                                 "Fermentation - ${item.temp.value}° ${item.temp.unit}"
                             }
 
-                            val twist = it.twist.let { item ->
+                            val twist = it.twist?.let { item ->
                                 "Twist - $item"
                             }
 
                             mash.toMutableList().apply {
                                 add(fermentation)
-                                add(twist)
+                                if (twist != null) {
+                                    add(twist)
+                                }
                             }
                         },
                         ingredients = listOf(
-                            beer.ingredients.malt.map {
+                            beer.ingredients?.malt?.map {
                                 "${it.name} - ${it.amount.value} ${it.amount.unit}"
-                            }
+                            } ?: emptyList(),
+
+                            beer.ingredients?.hops?.map {
+                                "${it.name} - ${it.amount.value} ${it.amount.unit}"
+                            } ?: emptyList(),
+                            beer.ingredients?.yeast?.let {
+                                listOf("$it")
+                            } ?: emptyList()
                             // handle other parts
                         ).flatten(),
                         foodPairing = beer.foodPairing,

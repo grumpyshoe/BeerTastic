@@ -6,6 +6,8 @@ import com.grumpyshoe.beertastic.domain.beer.usecase.GetBeers
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetBeersImpl
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetFavorites
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetFavoritesImpl
+import com.grumpyshoe.beertastic.domain.beer.usecase.GetRandomBeer
+import com.grumpyshoe.beertastic.domain.beer.usecase.GetRandomBeerImpl
 import com.grumpyshoe.beertastic.domain.beer.usecase.IsBeerFavorite
 import com.grumpyshoe.beertastic.domain.beer.usecase.IsBeerFavoriteImpl
 import com.grumpyshoe.beertastic.domain.beer.usecase.SetIsBeerFavorite
@@ -33,4 +35,7 @@ interface BeerDomainModule {
 
     @Binds
     fun bindsGetFavorites(data: GetFavoritesImpl): GetFavorites
+
+    @Binds
+    fun bindsGetRandomBeer(data: GetRandomBeerImpl): GetRandomBeer
 }

@@ -6,6 +6,7 @@ import com.grumpyshoe.beertastic.domain.beer.models.Beer
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetBeerById
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetBeers
 import com.grumpyshoe.beertastic.domain.beer.usecase.GetFavorites
+import com.grumpyshoe.beertastic.domain.beer.usecase.GetRandomBeer
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerDataState
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerUIItem
 import com.grumpyshoe.beertastic.result.onError
@@ -25,6 +26,7 @@ class HomeViewModel @Inject constructor(
     private val getBeers: GetBeers,
     private val getBeerById: GetBeerById,
     private val getFavorites: GetFavorites,
+    private val getRandomBeer: GetRandomBeer,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : ViewModel() {
 
@@ -37,6 +39,9 @@ class HomeViewModel @Inject constructor(
             it.toBeerUiItem()
         }
     }
+
+    private val _randomBeer = MutableStateFlow<BeerUIItem?>(null)
+    val randomBeer = _randomBeer.asStateFlow()
 
     val favorites = getFavorites().map { newBeerList ->
         newBeerList.map { beerId ->
@@ -87,6 +92,14 @@ class HomeViewModel @Inject constructor(
     fun loadMoreData() {
         page++
         loadBeerData()
+    }
+
+    fun showRandomBeer() {
+        viewModelScope.launch(ioDispatcher) {
+            getRandomBeer().onSuccess { beer ->
+                _randomBeer.emit(beer.toBeerUiItem())
+            }
+        }
     }
 }
 

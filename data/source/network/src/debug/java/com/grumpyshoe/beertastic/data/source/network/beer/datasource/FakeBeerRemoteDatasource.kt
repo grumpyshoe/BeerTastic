@@ -22,4 +22,9 @@ class FakeBeerRemoteDatasource : BeerRemoteDatasource {
         requestedBeerId = beerId
         return result
     }
+
+    // TEST REQUIRED
+    override suspend fun getRandomBeer(): ApiResult<List<BeerDto>> {
+        return result
+    }
 }

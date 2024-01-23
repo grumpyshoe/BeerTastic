@@ -18,4 +18,7 @@ interface PunkAPI {
     suspend fun getBeerById(
         @Path("beerId") beerId: Int,
     ): Response<List<BeerDto>>
+
+    @GET("beers/random")
+    suspend fun getRandomBeer(): Response<List<BeerDto>>
 }

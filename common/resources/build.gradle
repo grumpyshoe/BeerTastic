@@ -21,6 +21,9 @@ android {
 
 dependencies {
 
+    // Modules
+    implementation(project(":common:ui"))
+
     // Core
     implementation core_ktx
 

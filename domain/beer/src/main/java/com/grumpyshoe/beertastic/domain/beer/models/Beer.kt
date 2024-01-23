@@ -9,22 +9,22 @@ data class Beer(
     val tagline: String,
     val firstBrewed: String,
     val description: String,
-    val imageUrl: String,
-    val abv: Double,
-    val ibu: Double,
-    val targetFG: Double,
-    val targetOG: Double,
-    val ebc: Double,
-    val srm: Double,
-    val ph: Double,
-    val attenuationLevel: Double,
-    val volume: Volume,
-    val boilVolume: Volume,
-    val method: Method,
-    val ingredients: Ingredients,
-    val foodPairing: List<String>,
-    val brewersTips: String,
-    val contributedBy: String
+    val imageUrl: String?,
+    val abv: Double?,
+    val ibu: Double?,
+    val targetFG: Double?,
+    val targetOG: Double?,
+    val ebc: Double?,
+    val srm: Double?,
+    val ph: Double?,
+    val attenuationLevel: Double?,
+    val volume: Volume?,
+    val boilVolume: Volume?,
+    val method: Method?,
+    val ingredients: Ingredients?,
+    val foodPairing: List<String>?,
+    val brewersTips: String?,
+    val contributedBy: String?
 )
 
 @Immutable
@@ -37,13 +37,13 @@ data class Volume(
 data class Method(
     val mashTemp: List<MethodItem>,
     val fermentation: Fermentation,
-    val twist: String
+    val twist: String?
 )
 
 @Immutable
 data class MethodItem(
     val temp: Value,
-    val duration: Int,
+    val duration: Int?,
 )
 
 @Immutable
@@ -59,9 +59,9 @@ data class Value(
 
 @Immutable
 data class Ingredients(
-    val malt: List<IngredientsItem>,
-    val hops: List<IngredientsItem>,
-    val yeast: String
+    val malt: List<IngredientsItem>?,
+    val hops: List<IngredientsItem>?,
+    val yeast: String?
 )
 
 @Immutable

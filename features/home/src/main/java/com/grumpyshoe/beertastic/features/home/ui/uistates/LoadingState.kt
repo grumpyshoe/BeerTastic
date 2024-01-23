@@ -1,4 +1,4 @@
-package com.grumpyshoe.beertastic.features.home.ui.components
+package com.grumpyshoe.beertastic.features.home.ui.uistates
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,7 @@ import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 
 @Composable
-internal fun LoadingComponent() {
+internal fun LoadingState() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -54,7 +54,7 @@ internal fun LoadingComponent() {
 private fun LoadingComponentPreview() {
     AppNameTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-            LoadingComponent()
+            LoadingState()
         }
     }
 }

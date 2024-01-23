@@ -54,6 +54,13 @@ class BeerRepositoryImpl @Inject constructor(
     }
 
     override fun getFavorites(): Flow<List<Int>> = sharedPreferenceService.favorites
+
+    // TEST REQUIRED
+    override suspend fun getRandomBeer(): ApiResult<Beer> {
+        return beerRemoteDatasource.getRandomBeer().mapResult { dtoList ->
+            dtoList.firstOrNull()?.toBeer()
+        }
+    }
 }
 
 internal fun BeerDto.toBeer(): Beer? {
@@ -65,22 +72,22 @@ internal fun BeerDto.toBeer(): Beer? {
                 tagline = tagline!!,
                 firstBrewed = firstBrewed!!,
                 description = description!!,
-                imageUrl = imageUrl!!,
-                abv = abv!!,
-                ibu = ibu!!,
-                targetFG = targetFg!!,
-                targetOG = targetOg!!,
-                ebc = ebc!!,
-                srm = srm!!,
-                ph = ph!!,
-                attenuationLevel = attenuationLevel!!,
-                volume = volume!!.toVolume()!!,
-                boilVolume = boilVolume!!.toVolume()!!,
-                method = method!!.toMethod()!!,
-                ingredients = ingredients!!.toIngredients()!!,
-                foodPairing = foodPairing!!,
-                brewersTips = brewersTips!!,
-                contributedBy = contributedBy!!,
+                imageUrl = imageUrl,
+                abv = abv,
+                ibu = ibu,
+                targetFG = targetFg,
+                targetOG = targetOg,
+                ebc = ebc,
+                srm = srm,
+                ph = ph,
+                attenuationLevel = attenuationLevel,
+                volume = volume?.toVolume(),
+                boilVolume = boilVolume?.toVolume(),
+                method = method?.toMethod(),
+                ingredients = ingredients?.toIngredients(),
+                foodPairing = foodPairing,
+                brewersTips = brewersTips,
+                contributedBy = contributedBy,
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -111,12 +118,12 @@ internal fun MethodDto.toMethod(): Method? {
                 fermentation = fermentation?.let {
                     Fermentation(
                         temp = Value(
-                            value = it.temp?.value!!,
-                            unit = it.temp?.unit!!
+                            value = it.temp?.value ?: return null,
+                            unit = it.temp?.unit ?: return null
                         )
                     )
                 }!!,
-                twist = twist!!
+                twist = twist
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -133,7 +140,7 @@ internal fun MethodItemDto.toMethodItem(): MethodItem? {
                     value = temp!!.value!!,
                     unit = temp!!.unit!!
                 ),
-                duration = duration!!
+                duration = duration
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -146,13 +153,13 @@ internal fun IngredientsDto.toIngredients(): Ingredients? {
     with(this) {
         try {
             return Ingredients(
-                malt = malt!!.mapNotNull {
+                malt = malt?.mapNotNull {
                     it.toIngredientsItem()
                 },
-                hops = hops!!.mapNotNull {
+                hops = hops?.mapNotNull {
                     it.toIngredientsItem()
                 },
-                yeast = yeast!!
+                yeast = yeast
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
