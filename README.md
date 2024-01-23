@@ -18,7 +18,13 @@ The app `BeerTastic` is a showcase app that illustrates my approach on how I acc
 
 # Content of the app
 
-The content of the app and the range of functions are kept small. The app uses the Punk API (https://punkapi.com/) to list different beers. Selecting a beer opens a detailed view containing further information. You can add a beer to your favorites using the heart symbol at the top right of the detailed view. These favorites are then highlighted in the aforementioned overview list and displayed in a separate area above the actual list for quick access.
+The content of the app and the range of functions are kept small. The app uses the Punk API (https://punkapi.com/) to list different beers. 
+
+## Features
+* The homescreen showns a list of beer which loads more data while scrolling down (like a infinite list).
+* The homescreen also shows a option to show a random beer.
+* Selecting a beer (taping on the list item) opens a detailed view containing further information.
+* You can add a beer to your favorites using the heart symbol at the top right of the detailed view. These favorites are then highlighted in the aforementioned overview list and displayed in a separate area above the actual list for quick access.
 
 # Architecture
 
