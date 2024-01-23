@@ -1,4 +1,4 @@
-package com.grumpyshoe.beertastic.features.home.ui.components
+package com.grumpyshoe.beertastic.features.home.ui.uistates
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,7 +18,7 @@ import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 
 @Composable
-internal fun ErrorComponent() {
+internal fun ErrorState() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -41,7 +41,7 @@ internal fun ErrorComponent() {
 private fun ErrorComponentPreview() {
     AppNameTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            ErrorComponent()
+            ErrorState()
         }
     }
 }

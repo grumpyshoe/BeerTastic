@@ -5,6 +5,7 @@ import com.grumpyshoe.beertastic.domain.beer.models.getFakeBeer
 import com.grumpyshoe.beertastic.domain.beer.usecase.FakeGetBeerById
 import com.grumpyshoe.beertastic.domain.beer.usecase.FakeGetBeers
 import com.grumpyshoe.beertastic.domain.beer.usecase.FakeGetFavorites
+import com.grumpyshoe.beertastic.domain.beer.usecase.FakeGetRandomBeer
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerDataState
 import com.grumpyshoe.beertastic.result.ApiError
 import com.grumpyshoe.beertastic.result.ApiSuccess
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -24,6 +26,7 @@ class HomeViewModelTest {
     private lateinit var getBeers: FakeGetBeers
     private lateinit var getBeerById: FakeGetBeerById
     private lateinit var getFavorites: FakeGetFavorites
+    private lateinit var getRandomBeer: FakeGetRandomBeer
     private val testDispatcher = UnconfinedTestDispatcher()
 
     private lateinit var sut: HomeViewModel
@@ -33,6 +36,7 @@ class HomeViewModelTest {
         getBeers = FakeGetBeers()
         getBeerById = FakeGetBeerById()
         getFavorites = FakeGetFavorites()
+        getRandomBeer = FakeGetRandomBeer()
     }
 
     private fun initViewModel() {
@@ -40,6 +44,7 @@ class HomeViewModelTest {
             getBeers = getBeers,
             getBeerById = getBeerById,
             getFavorites = getFavorites,
+            getRandomBeer = getRandomBeer,
             ioDispatcher = testDispatcher
         )
     }
@@ -193,5 +198,33 @@ class HomeViewModelTest {
         val actual = runBlocking { sut.favorites.take(1).lastOrNull() }
         assertEquals(1, actual?.size)
         assertTrue(actual?.map { it.id }?.contains(fakeBeer.id) == true)
+    }
+
+    @Test
+    fun `randomBeer - on init - is null`() {
+
+        // init viewModel
+        initViewModel()
+
+        // check assertions
+        val actual = runBlocking { sut.randomBeer.take(1).lastOrNull() }
+        assertNull(actual)
+    }
+
+    @Test
+    fun `randomBeer - on request beer - contains correct data`() {
+
+        // define test data
+        getRandomBeer.result = ApiSuccess(fakeBeer)
+
+        // init viewModel
+        initViewModel()
+
+        // trigger action
+        sut.showRandomBeer()
+
+        // check assertions
+        val actual = runBlocking { sut.randomBeer.take(1).lastOrNull() }
+        assertEquals(fakeBeer.id, actual!!.id)
     }
 }

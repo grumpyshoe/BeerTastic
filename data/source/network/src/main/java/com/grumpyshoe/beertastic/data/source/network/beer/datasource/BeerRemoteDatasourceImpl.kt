@@ -17,4 +17,8 @@ class BeerRemoteDatasourceImpl @Inject constructor(
     override suspend fun getBeerById(beerId: Int): ApiResult<List<BeerDto>> {
         return handleApi { api.getBeerById(beerId) }
     }
+
+    override suspend fun getRandomBeer(): ApiResult<List<BeerDto>> {
+        return handleApi { api.getRandomBeer() }
+    }
 }

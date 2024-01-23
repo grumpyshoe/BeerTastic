@@ -10,4 +10,5 @@ interface BeerRepository {
     suspend fun checkIfFavorite(beerId: Int): Boolean
     suspend fun setIsBeerFavorite(beerId: Int, isFavorite: Boolean)
     fun getFavorites(): Flow<List<Int>>
+    suspend fun getRandomBeer(): ApiResult<Beer>
 }
