@@ -8,8 +8,8 @@
 
 <div float="left">
 <img src="/preview/splashscreen.png"  width="24%"/>
-<img src="/preview/beerOverview.png"  width="24%"/>
-<img src="/preview/beerDetails.png"  width="24%"/>
+<img src="/preview/beerOverview2.png"  width="24%"/>
+<img src="/preview/beerDetails2.png"  width="24%"/>
 </div>
 
 # Introduction
