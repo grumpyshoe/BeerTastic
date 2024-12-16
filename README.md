@@ -1,3 +1,11 @@
+<p>
+<h2><i>Update:</i></h2>
+Unfortunately, the API used in this project is no longer available. A working project will be available again soon, until then this repo can show how I work and structure projects despite the fact that it currently does not provide any data.
+
+</p>
+
+<hr/>
+
 <h1 align="center">BeerTastic</h1>
 
 <p align="center">
