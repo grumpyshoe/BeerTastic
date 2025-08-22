@@ -53,7 +53,8 @@ internal fun BeerListState(
     loadMoreData: () -> Unit,
     showDetails: (Int) -> Unit,
     randomBeer: BeerUIItem?,
-    showRandomBeer: () -> Unit
+    showRandomBeer: () -> Unit,
+    hideRandomBeer: () -> Unit,
 ) {
     var loading by remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
@@ -81,6 +82,7 @@ internal fun BeerListState(
             RandomBeer(
                 randomBeer = randomBeer,
                 showRandomBeer = showRandomBeer,
+                hideRandomBeer = hideRandomBeer,
                 showDetails = showDetails
             )
 
@@ -95,7 +97,7 @@ internal fun BeerListState(
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            items(favorites) { beerUIItem ->
+            items(favorites, key = { it.id }) { beerUIItem ->
 
                 BeerUIItemView(
                     beerItem = beerUIItem,
@@ -129,7 +131,7 @@ internal fun BeerListState(
 private fun BeerUIItemView(
     beerItem: BeerUIItem,
     showDetails: (Int) -> Unit,
-    borderStrokeColor: Color = MaterialTheme.colorScheme.surface
+    borderStrokeColor: Color = MaterialTheme.colorScheme.surface,
 ) {
     Box(modifier = Modifier.padding(bottom = 16.dp)) {
         Card(
@@ -226,7 +228,8 @@ private fun BeerListComponentPreview() {
                 },
                 loadMoreData = {},
                 randomBeer = null,
-                showRandomBeer = {}
+                showRandomBeer = {},
+                hideRandomBeer = {}
             )
         }
     }

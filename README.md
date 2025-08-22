@@ -1,11 +1,3 @@
-<p>
-<h2><i>Update:</i></h2>
-Unfortunately, the API used in this project is no longer available. A working project will be available again soon, until then this repo can show how I work and structure projects despite the fact that it currently does not provide any data.
-
-</p>
-
-<hr/>
-
 <h1 align="center">BeerTastic</h1>
 
 <p align="center">
@@ -16,8 +8,8 @@ Unfortunately, the API used in this project is no longer available. A working pr
 
 <div float="left">
 <img src="/preview/splashscreen.png"  width="24%"/>
-<img src="/preview/beerOverview2.png"  width="24%"/>
-<img src="/preview/beerDetails2.png"  width="24%"/>
+<img src="/preview/beerOverview.png"  width="24%"/>
+<img src="/preview/beerDetails.png"  width="24%"/>
 </div>
 
 # Introduction
@@ -26,7 +18,7 @@ The app `BeerTastic` is a showcase app that illustrates my approach on how I acc
 
 # Content of the app
 
-The content of the app and the range of functions are kept small. The app uses the Punk API (https://punkapi.com/) to list different beers. 
+The content of the app and the range of functions are kept small. The app uses the Punk API (https://punkapi.online/v3/) to list different beers. 
 
 ## Features
 * The homescreen shows a list of beer which loads more data while scrolling down (like a infinite list).

@@ -5,6 +5,6 @@ import com.grumpyshoe.beertastic.result.ApiResult
 
 interface BeerRemoteDatasource {
     suspend fun getBeers(page: Int): ApiResult<List<BeerDto>>
-    suspend fun getBeerById(beerId: Int): ApiResult<List<BeerDto>>
-    suspend fun getRandomBeer(): ApiResult<List<BeerDto>>
+    suspend fun getBeerById(beerId: Int): ApiResult<BeerDto?>
+    suspend fun getRandomBeer(): ApiResult<BeerDto?>
 }

@@ -14,11 +14,11 @@ class BeerRemoteDatasourceImpl @Inject constructor(
         return handleApi { api.getBeers(page = page) }
     }
 
-    override suspend fun getBeerById(beerId: Int): ApiResult<List<BeerDto>> {
+    override suspend fun getBeerById(beerId: Int): ApiResult<BeerDto> {
         return handleApi { api.getBeerById(beerId) }
     }
 
-    override suspend fun getRandomBeer(): ApiResult<List<BeerDto>> {
+    override suspend fun getRandomBeer(): ApiResult<BeerDto?> {
         return handleApi { api.getRandomBeer() }
     }
 }

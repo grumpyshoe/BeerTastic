@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         all {
-            buildConfigField('String', 'BASE_URL', '"https://api.punkapi.com/v2/"')
+            buildConfigField('String', 'BASE_URL', '"https://punkapi.online/v3/"')
         }
     }
 }

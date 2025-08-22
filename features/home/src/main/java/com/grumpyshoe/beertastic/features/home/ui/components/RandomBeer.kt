@@ -2,17 +2,25 @@ package com.grumpyshoe.beertastic.features.home.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -24,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -40,7 +49,8 @@ import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 fun RandomBeer(
     randomBeer: BeerUIItem?,
     showRandomBeer: () -> Unit,
-    showDetails: (Int) -> Unit
+    hideRandomBeer: () -> Unit,
+    showDetails: (Int) -> Unit,
 ) {
     Card {
         Column(
@@ -70,6 +80,26 @@ fun RandomBeer(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             } else {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.TopEnd
+                ) {
+                    IconButton(
+                        modifier = Modifier
+                            .clip(CircleShape),
+                        onClick = {
+                            loading = true
+                            hideRandomBeer()
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    )
+                }
                 Text(
                     text = randomBeer.name,
                     textAlign = TextAlign.Center,
@@ -120,28 +150,56 @@ fun RandomBeer(
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Spacer(modifier = Modifier.height(16.dp))
+                Row {
+                    OutlinedButton(
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            contentColor = MaterialTheme.colorScheme.primaryContainer,
+                        ),
+                        onClick = {
+                            showDetails(randomBeer.id)
+                        }
+                    ) {
+                        Text("See more details...")
+                    }
+
+                    Spacer(modifier = Modifier.width(16.dp))
+
+                    IconButton(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .border(
+                                1.dp, MaterialTheme
+                                    .colorScheme.onPrimaryContainer, CircleShape
+                            ),
+                        onClick = {
+                            loading = true
+                            showRandomBeer()
+                        },
+                        content = {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        }
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            if (randomBeer == null) {
                 OutlinedButton(
                     colors = ButtonDefaults.outlinedButtonColors(
-                        containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        contentColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     ),
                     onClick = {
-                        showDetails(randomBeer.id)
+                        loading = true
+                        showRandomBeer()
                     }
                 ) {
-                    Text("See more details...")
+                    Text("Show my something new")
                 }
-            }
-            OutlinedButton(
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                ),
-                onClick = {
-                    loading = true
-                    showRandomBeer()
-                }
-            ) {
-                Text("Show my something new")
             }
         }
     }
@@ -155,6 +213,7 @@ private fun RandomBeerInitStatePreview() {
             RandomBeer(
                 randomBeer = null,
                 showRandomBeer = {},
+                hideRandomBeer = {},
                 showDetails = {}
             )
         }
@@ -175,6 +234,7 @@ private fun RandomBeerWithBeerPreview() {
                     tagline = "Tag1, Tag2"
                 ),
                 showRandomBeer = {},
+                hideRandomBeer = {},
                 showDetails = {}
             )
         }

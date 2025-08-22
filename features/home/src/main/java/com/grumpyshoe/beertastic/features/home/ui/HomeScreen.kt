@@ -16,11 +16,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppNameTheme
-import com.grumpyshoe.beertastic.features.home.ui.uistates.ErrorState
-import com.grumpyshoe.beertastic.features.home.ui.uistates.LoadingState
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerDataState
 import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerUIItem
 import com.grumpyshoe.beertastic.features.home.ui.uistates.BeerListState
+import com.grumpyshoe.beertastic.features.home.ui.uistates.ErrorState
+import com.grumpyshoe.beertastic.features.home.ui.uistates.LoadingState
 import com.grumpyshoe.beertastic.features.home.viewmodel.HomeViewModel
 import com.grumpyshoe.common.ui.DefaultLightDarkPreview
 
@@ -42,7 +42,8 @@ internal fun HomeRoute(
         loadMoreData = viewModel::loadMoreData,
         showDetails = showDetails,
         randomBeer = randomBeer,
-        showRandomBeer = viewModel::showRandomBeer
+        showRandomBeer = viewModel::showRandomBeer,
+        hideRandomBeer = viewModel::hideRandomBeer
     )
 }
 
@@ -55,7 +56,8 @@ private fun HomeScreen(
     loadMoreData: () -> Unit,
     showDetails: (Int) -> Unit,
     randomBeer: BeerUIItem?,
-    showRandomBeer: () -> Unit
+    showRandomBeer: () -> Unit,
+    hideRandomBeer: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -81,7 +83,8 @@ private fun HomeScreen(
                     loadMoreData = loadMoreData,
                     showDetails = showDetails,
                     randomBeer = randomBeer,
-                    showRandomBeer = showRandomBeer
+                    showRandomBeer = showRandomBeer,
+                    hideRandomBeer = hideRandomBeer
                 )
             }
         }
@@ -99,6 +102,7 @@ private fun HomeScreenLoadingPreview() {
             showDetails = {},
             loadMoreData = {},
             showRandomBeer = {},
+            hideRandomBeer = {},
             randomBeer = null
         )
     }
@@ -115,6 +119,7 @@ private fun HomeScreenErrorPreview() {
             showDetails = {},
             loadMoreData = {},
             showRandomBeer = {},
+            hideRandomBeer = {},
             randomBeer = null
         )
     }
@@ -147,6 +152,7 @@ private fun HomeScreenBeerOverviewPreview() {
             showDetails = {},
             loadMoreData = {},
             showRandomBeer = {},
+            hideRandomBeer = {},
             randomBeer = null
         )
     }

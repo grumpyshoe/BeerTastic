@@ -1,6 +1,7 @@
 package com.grumpyshoe.beertastic.data.repository.beers.repository
 
 import android.util.Log
+import com.grumpyshoe.beertastic.data.source.network.BuildConfig.BASE_URL
 import com.grumpyshoe.beertastic.data.source.network.beer.datasource.BeerRemoteDatasource
 import com.grumpyshoe.beertastic.data.source.network.beer.model.BeerDto
 import com.grumpyshoe.beertastic.data.source.network.beer.model.IngredientsDto
@@ -37,8 +38,8 @@ class BeerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getBeerById(beerId: Int): ApiResult<Beer> {
-        return beerRemoteDatasource.getBeerById(beerId).mapResult { dtoList ->
-            dtoList.firstOrNull()?.toBeer()
+        return beerRemoteDatasource.getBeerById(beerId).mapResult { beerDto ->
+            beerDto?.toBeer()
         }
     }
 
@@ -55,10 +56,9 @@ class BeerRepositoryImpl @Inject constructor(
 
     override fun getFavorites(): Flow<List<Int>> = sharedPreferenceService.favorites
 
-    // TEST REQUIRED
     override suspend fun getRandomBeer(): ApiResult<Beer> {
-        return beerRemoteDatasource.getRandomBeer().mapResult { dtoList ->
-            dtoList.firstOrNull()?.toBeer()
+        return beerRemoteDatasource.getRandomBeer().mapResult { beerDto ->
+            beerDto?.toBeer()
         }
     }
 }
@@ -72,7 +72,7 @@ internal fun BeerDto.toBeer(): Beer? {
                 tagline = tagline!!,
                 firstBrewed = firstBrewed!!,
                 description = description!!,
-                imageUrl = imageUrl,
+                imageUrl = "${BASE_URL}images/$imageId",
                 abv = abv,
                 ibu = ibu,
                 targetFG = targetFg,

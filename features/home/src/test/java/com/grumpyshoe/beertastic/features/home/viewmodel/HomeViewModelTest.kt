@@ -227,4 +227,21 @@ class HomeViewModelTest {
         val actual = runBlocking { sut.randomBeer.take(1).lastOrNull() }
         assertEquals(fakeBeer.id, actual!!.id)
     }
+
+    @Test
+    fun `randomBeer - on delete random selection - data is removed`() {
+
+        // define test data
+        getRandomBeer.result = ApiSuccess(fakeBeer)
+
+        // init viewModel
+        initViewModel()
+
+        // trigger action
+        sut.hideRandomBeer()
+
+        // check assertions
+        val actual = runBlocking { sut.randomBeer.take(1).lastOrNull() }
+        assertNull(actual)
+    }
 }

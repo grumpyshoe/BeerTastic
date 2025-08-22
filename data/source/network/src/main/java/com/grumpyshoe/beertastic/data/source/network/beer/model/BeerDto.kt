@@ -11,8 +11,8 @@ data class BeerDto(
     @field:Json(name = "first_brewed")
     val firstBrewed: String? = null,
     val description: String? = null,
-    @field:Json(name = "image_url")
-    val imageUrl: String? = null,
+    @field:Json(name = "image")
+    val imageId: String? = null,
     val abv: Double? = null,
     val ibu: Double? = null,
     @field:Json(name = "target_fg")

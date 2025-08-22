@@ -12,7 +12,6 @@ import com.grumpyshoe.beertastic.features.home.ui.uimodel.BeerUIItem
 import com.grumpyshoe.beertastic.result.onError
 import com.grumpyshoe.beertastic.result.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +19,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -100,6 +100,10 @@ class HomeViewModel @Inject constructor(
                 _randomBeer.emit(beer.toBeerUiItem())
             }
         }
+    }
+
+    fun hideRandomBeer() {
+        _randomBeer.tryEmit(null)
     }
 }
 
