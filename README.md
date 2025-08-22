@@ -7,9 +7,9 @@
 </p>
 
 <div float="left">
-<img src="/preview/splashscreen.png"  width="24%"/>
-<img src="/preview/beerOverview.png"  width="24%"/>
-<img src="/preview/beerDetails.png"  width="24%"/>
+<img src="/preview/splashscreen3.png"  width="24%"/>
+<img src="/preview/beerOverview3.png"  width="24%"/>
+<img src="/preview/beerDetails3.png"  width="24%"/>
 </div>
 
 # Introduction
