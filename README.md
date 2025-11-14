@@ -87,7 +87,7 @@ cd BeerTastic
 Open the project in **Android Studio**.
 
 ### 3. Build and run
-The should start on click Run in**Android Studio**. The eis no API-Key needed for this.
+The should start on click `Run` in **Android Studio**. There is no API-Key needed for this app.
 
 You can now explore the app on an emulator or physical device (API level 26+).
 
