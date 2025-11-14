@@ -1,3 +1,4 @@
+
 package com.grumpyshoe.beertastic.data.repository.beers.repository
 
 import android.util.Log
@@ -19,47 +20,40 @@ import com.grumpyshoe.beertastic.domain.beer.models.MethodItem
 import com.grumpyshoe.beertastic.domain.beer.models.Value
 import com.grumpyshoe.beertastic.domain.beer.models.Volume
 import com.grumpyshoe.beertastic.domain.beer.repository.BeerRepository
-import com.grumpyshoe.beertastic.result.ApiResult
-import com.grumpyshoe.beertastic.result.mapResult
-import javax.inject.Inject
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiResult
+import com.grumpyshoe.beertastic.domain.beer.utils.mapResult
 import kotlinx.coroutines.flow.Flow
 
-class BeerRepositoryImpl @Inject constructor(
+class BeerRepositoryImpl(
     private val beerRemoteDatasource: BeerRemoteDatasource,
-    private val sharedPreferenceService: SharedPreferenceService
+    private val sharedPreferenceService: SharedPreferenceService,
 ) : BeerRepository {
-
-    override suspend fun getBeers(page: Int): ApiResult<List<Beer>> {
-        return beerRemoteDatasource.getBeers(page = page).mapResult { dtoList ->
-            dtoList.mapNotNull { dto ->
-                dto.toBeer()
-            }
+    override suspend fun getBeers(page: Int): ApiResult<List<Beer>> = beerRemoteDatasource.getBeers(page = page).mapResult { dtoList ->
+        dtoList.mapNotNull { dto ->
+            dto.toBeer()
         }
     }
 
-    override suspend fun getBeerById(beerId: Int): ApiResult<Beer> {
-        return beerRemoteDatasource.getBeerById(beerId).mapResult { beerDto ->
-            beerDto?.toBeer()
-        }
+    override suspend fun getBeerById(beerId: Int): ApiResult<Beer> = beerRemoteDatasource.getBeerById(beerId).mapResult { beerDto ->
+        beerDto?.toBeer()
     }
 
-    override suspend fun checkIfFavorite(beerId: Int): Boolean {
-        return sharedPreferenceService.checkIfFavorite(beerId)
-    }
+    override suspend fun checkIfFavorite(beerId: Int): Boolean = sharedPreferenceService.checkIfFavorite(beerId)
 
-    override suspend fun setIsBeerFavorite(beerId: Int, isFavorite: Boolean) {
+    override suspend fun setIsBeerFavorite(
+        beerId: Int,
+        isFavorite: Boolean,
+    ) {
         sharedPreferenceService.setIsBeerFavorite(
             beerId = beerId,
-            isFavorite = isFavorite
+            isFavorite = isFavorite,
         )
     }
 
     override fun getFavorites(): Flow<List<Int>> = sharedPreferenceService.favorites
 
-    override suspend fun getRandomBeer(): ApiResult<Beer> {
-        return beerRemoteDatasource.getRandomBeer().mapResult { beerDto ->
-            beerDto?.toBeer()
-        }
+    override suspend fun getRandomBeer(): ApiResult<Beer> = beerRemoteDatasource.getRandomBeer().mapResult { beerDto ->
+        beerDto?.toBeer()
     }
 }
 
@@ -101,7 +95,7 @@ internal fun VolumeDto.toVolume(): Volume? {
         try {
             return Volume(
                 value = value!!,
-                unit = unit!!
+                unit = unit!!,
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -115,15 +109,17 @@ internal fun MethodDto.toMethod(): Method? {
         try {
             return Method(
                 mashTemp = mashTemp?.mapNotNull { it.toMethodItem() }!!,
-                fermentation = fermentation?.let {
+                fermentation =
+                fermentation?.let {
                     Fermentation(
-                        temp = Value(
+                        temp =
+                        Value(
                             value = it.temp?.value ?: return null,
-                            unit = it.temp?.unit ?: return null
-                        )
+                            unit = it.temp?.unit ?: return null,
+                        ),
                     )
                 }!!,
-                twist = twist
+                twist = twist,
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -136,11 +132,12 @@ internal fun MethodItemDto.toMethodItem(): MethodItem? {
     with(this) {
         try {
             return MethodItem(
-                temp = Value(
+                temp =
+                Value(
                     value = temp!!.value!!,
-                    unit = temp!!.unit!!
+                    unit = temp!!.unit!!,
                 ),
-                duration = duration
+                duration = duration,
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -153,13 +150,15 @@ internal fun IngredientsDto.toIngredients(): Ingredients? {
     with(this) {
         try {
             return Ingredients(
-                malt = malt?.mapNotNull {
+                malt =
+                malt?.mapNotNull {
                     it.toIngredientsItem()
                 },
-                hops = hops?.mapNotNull {
+                hops =
+                hops?.mapNotNull {
                     it.toIngredientsItem()
                 },
-                yeast = yeast
+                yeast = yeast,
             )
         } catch (e: Exception) {
             Log.e("Parser Error", e.localizedMessage, e)
@@ -173,9 +172,10 @@ internal fun IngredientsItemDto.toIngredientsItem(): IngredientsItem? {
         try {
             return IngredientsItem(
                 name = name!!,
-                amount = Value(
+                amount =
+                Value(
                     value = amount!!.value!!,
-                    unit = amount!!.unit!!
+                    unit = amount!!.unit!!,
                 ),
                 add = add,
                 attribute = attribute,

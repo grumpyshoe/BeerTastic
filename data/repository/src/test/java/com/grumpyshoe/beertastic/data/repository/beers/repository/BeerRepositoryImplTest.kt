@@ -1,11 +1,12 @@
 package com.grumpyshoe.beertastic.data.repository.beers.repository
 
+import com.grumpyshoe.beertastic.data.source.network.BuildConfig.BASE_URL
 import com.grumpyshoe.beertastic.data.source.network.beer.datasource.FakeBeerRemoteDatasource
 import com.grumpyshoe.beertastic.data.source.network.beer.model.getFakeBeerDto
 import com.grumpyshoe.beertastic.data.source.preferences.FakeSharedPreferenceService
 import com.grumpyshoe.beertastic.domain.beer.repository.BeerRepository
-import com.grumpyshoe.beertastic.result.ApiError
-import com.grumpyshoe.beertastic.result.ApiSuccess
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiError
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiSuccess
 import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
@@ -56,7 +57,7 @@ class BeerRepositoryImplTest {
         assertEquals(beerDto.tagline, actual.tagline)
         assertEquals(beerDto.firstBrewed, actual.firstBrewed)
         assertEquals(beerDto.description, actual.description)
-        assertEquals(beerDto.imageId, actual.imageUrl)
+        assertEquals("${BASE_URL}images/${beerDto.imageId}", actual.imageUrl)
         assertEquals(beerDto.abv, actual.abv)
         assertEquals(beerDto.ibu, actual.ibu)
         assertEquals(beerDto.targetFg, actual.targetFG)

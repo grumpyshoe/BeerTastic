@@ -1,40 +1,118 @@
-<h1 align="center">BeerTastic</h1>
+<h1 align="center">🍺 BeerTastic</h1>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/License-MIT-purple.svg"/></a>
-  <a href="https://android-arsenal.com/api?level=26"><img alt="API" src="https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/grumpyshoe/BeerTastic/actions"><img alt="Build Status" src="https://github.com/grumpyshoe/BeerTastic/workflows/Android%20CI/badge.svg"/></a> 
+  <a href="https://android-arsenal.com/api?level=26"><img alt="API" src="https://img.shields.io/badge/API-26%2B-brightgreen.svg"/></a>
+  <a href="https://github.com/grumpyshoe/BeerTastic/actions"><img alt="Build Status" src="https://github.com/grumpyshoe/BeerTastic/workflows/Android%20CI/badge.svg"/></a>
 </p>
 
-<div float="left">
-<img src="/preview/splashscreen3.png"  width="24%"/>
-<img src="/preview/beerOverview3.png"  width="24%"/>
-<img src="/preview/beerDetails3.png"  width="24%"/>
+<p align="center">
+  <em>An Android showcase app built with Clean Architecture, Jetpack Compose, and the Punk API.</em>
+</p>
+
+---
+
+<div align="center">
+  <img src="documentation/preview/splashscreen.png" width="23%"/>
+  <img src="documentation/preview/beerOverview.png" width="23%"/>
+  <img src="documentation/preview/beerDetails.png" width="23%"/>
 </div>
 
-# Introduction
+---
 
-The app `BeerTastic` is a showcase app that illustrates my approach on how I accomplish tasks and create scalable and maintainable projects.
+## 🏁 Introduction
 
-# Content of the app
+**BeerTastic** is a showcase Android app that demonstrates how to build scalable, maintainable, and testable projects following **Clean Architecture** principles.  
+It serves as a practical example of modern Android development with **Jetpack Compose** and **Kotlin**.
 
-The content of the app and the range of functions are kept small. The app uses the Punk API (https://punkapi.online/v3/) to list different beers. 
+---
 
-## Features
-* The homescreen shows a list of beer which loads more data while scrolling down (like a infinite list).
-* The homescreen also shows a option to show a random beer.
-* Selecting a beer (taping on the list item) opens a detailed view containing further information.
-* You can add a beer to your favorites using the heart symbol at the top right of the detailed view. These favorites are then highlighted in the aforementioned overview list and displayed in a separate area above the actual list for quick access.
+## 🍻 App Overview
 
-# Architecture
+The app fetches data from the [Punk API](https://punkapi.com/documentation/v2) to display a variety of beers.
 
-The project is structured according to the `clean architecture` pattern, so that it enables maximum testability. At the top level are the modules `app`, `common`, `data`, `domain` and `features`. Within these modules there are sub-modules to differentiate between different areas. This concept reduces the build time significantly, as unchanged modules can be loaded from the cache.
+### ✨ Features
+- Infinite scrolling beer list on the home screen
+- Option to display a **random beer**
+- Detailed view for each beer with extended information
+- Mark beers as **favorites** — favorites are highlighted and displayed at the top of the list for quick access
 
-For the communication between UI & data the MVVM pattern was used to achieve a clear differentiation of responsibilities. The UI elements themselves were implemented in compose.
+---
 
-# More about me
+## 🧱 Architecture
 
-Name	 : Thomas Cirksena  
-Email    : thomas.cirksena@gmail.com  
-Github   : https://github.com/grumpyshoe  
-LinkedIn : www.linkedin.com/in/thomas-cirksena  
+The project follows the **Clean Architecture** pattern to ensure high testability, separation of concerns, and modularity.  
+At the top level, the project consists of the following modules:
+
+### Project Structure
+```
+:app                 → Main application module  
+:data                → Handles API calls, repositories, and data sources  
+:domain              → Contains use cases and business logic  
+:presentation        → UI layer (Jetpack Compose, ViewModels)
+  ├─ :common         → Shared UI components, themes, and resources  
+  ├─ :features
+  │   ├─ :home       → Beer list and random beer screen  
+  │   ├─ :details    → Detailed beer information screen  
+  │   └─ :splashscreen → App startup screen  
+```
+
+The UI is fully built with **Jetpack Compose**.
+
+---
+
+## ⚙️ Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| **Language** | [Kotlin](https://kotlinlang.org/) |
+| **UI Framework** | [Jetpack Compose](https://developer.android.com/jetpack/compose) |
+| **Architecture** | Clean Architecture |
+| **Async Programming** | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Flow](https://kotlinlang.org/docs/flow.html) |
+| **Dependency Injection** | [Koin](https://insert-koin.io/) |
+| **Networking** | [Retrofit](https://square.github.io/retrofit/) |
+| **Build System** | Gradle (Modularized Setup) |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/grumpyshoe/BeerTastic.git
+cd BeerTastic
+```
+
+### 2. Open the project
+Open the project in **Android Studio**.
+
+### 3. Build and run
+The should start on click Run in**Android Studio**. The eis no API-Key needed for this.
+
+You can now explore the app on an emulator or physical device (API level 26+).
+
+---
+### Run unit tests
+```bash
+./gradlew testDebug
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+## 👨‍💻 About the Author
+
+**Thomas Cirksena**  
+📧 [thomas.cirksena@gmail.com](mailto:thomas.cirksena@gmail.com)  
+🌐 [github.com/grumpyshoe](https://github.com/grumpyshoe)  
+💼 [linkedin.com/in/thomas-cirksena](https://www.linkedin.com/in/thomas-cirksena)
+
+---
+
+> _“Code is like beer — it’s best when it’s clean and well-crafted.”_ 😉
+  

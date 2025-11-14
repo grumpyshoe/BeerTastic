@@ -2,8 +2,8 @@ package com.grumpyshoe.beertastic.domain.beer.usecase
 
 import com.grumpyshoe.beertastic.domain.beer.models.Beer
 import com.grumpyshoe.beertastic.domain.beer.models.fakeBeer
-import com.grumpyshoe.beertastic.result.ApiResult
-import com.grumpyshoe.beertastic.result.ApiSuccess
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiResult
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiSuccess
 
 class FakeGetRandomBeer : GetRandomBeer {
 

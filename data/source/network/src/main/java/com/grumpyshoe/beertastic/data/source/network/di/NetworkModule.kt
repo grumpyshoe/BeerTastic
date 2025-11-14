@@ -1,50 +1,31 @@
 package com.grumpyshoe.beertastic.data.source.network.di
 
-import com.grumpyshoe.beertastic.data.source.network.BuildConfig.BASE_URL
-import com.squareup.moshi.Moshi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.grumpyshoe.beertastic.data.source.network.BuildConfig
+import com.grumpyshoe.beertastic.data.source.network.beer.di.BeerNetworkModule
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
+import retrofit2.converter.gson.GsonConverterFactory
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
+internal val NetworkCoreModule =
+    module {
 
-    @Singleton
-    @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) }
+        single { HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) } }
+        single {
+            OkHttpClient
+                .Builder()
+                .addInterceptor(get<HttpLoggingInterceptor>())
+                .build()
+        }
+        single {
+            Retrofit
+                .Builder()
+                .client(get<OkHttpClient>())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BuildConfig.BASE_URL)
+                .build()
+        }
     }
 
-    @Singleton
-    @Provides
-    fun getOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideMoshi(): Moshi {
-        return Moshi.Builder().build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofitInstance(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(BASE_URL)
-            .build()
-    }
-}
+val NetworkModule = NetworkCoreModule + BeerNetworkModule

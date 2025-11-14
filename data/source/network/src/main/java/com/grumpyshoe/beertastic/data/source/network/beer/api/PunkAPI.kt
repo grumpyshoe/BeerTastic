@@ -1,3 +1,4 @@
+
 package com.grumpyshoe.beertastic.data.source.network.beer.api
 
 import com.grumpyshoe.beertastic.data.source.network.beer.model.BeerDto

@@ -2,14 +2,13 @@ package com.grumpyshoe.beertastic.data.source.network.beer.datasource
 
 import com.grumpyshoe.beertastic.data.source.network.beer.model.BeerDto
 import com.grumpyshoe.beertastic.data.source.network.beer.model.fakeBeerDto
-import com.grumpyshoe.beertastic.result.ApiError
-import com.grumpyshoe.beertastic.result.ApiResult
-import com.grumpyshoe.beertastic.result.ApiSuccess
-import com.grumpyshoe.beertastic.result.onError
-import com.grumpyshoe.beertastic.result.onSuccess
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiError
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiResult
+import com.grumpyshoe.beertastic.domain.beer.utils.ApiSuccess
+import com.grumpyshoe.beertastic.domain.beer.utils.onError
+import com.grumpyshoe.beertastic.domain.beer.utils.onSuccess
 
 class FakeBeerRemoteDatasource : BeerRemoteDatasource {
-
     var result: ApiResult<List<BeerDto>> = ApiSuccess(listOf(fakeBeerDto))
     var requestedPage: Int? = null
         private set
@@ -26,15 +25,19 @@ class FakeBeerRemoteDatasource : BeerRemoteDatasource {
         var parseResult: ApiResult<BeerDto?> = ApiError("Fehler")
         result.onSuccess {
             parseResult = ApiSuccess(it.firstOrNull())
+        }.onError {
+            parseResult = ApiError(it)
         }
         return parseResult
     }
 
     override suspend fun getRandomBeer(): ApiResult<BeerDto?> {
-        var parserResult: ApiResult<BeerDto?> = ApiError("Fehler")
-         result.onSuccess {
-             parserResult = ApiSuccess(it.firstOrNull())
-         }
-        return parserResult
+        var parseResult: ApiResult<BeerDto?> = ApiError("Fehler")
+        result.onSuccess {
+            parseResult = ApiSuccess(it.firstOrNull())
+        }.onError {
+            parseResult = ApiError(it)
+        }
+        return parseResult
     }
 }

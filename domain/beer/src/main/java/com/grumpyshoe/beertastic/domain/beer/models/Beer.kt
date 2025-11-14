@@ -1,8 +1,6 @@
+
 package com.grumpyshoe.beertastic.domain.beer.models
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 data class Beer(
     val id: Int,
     val name: String,
@@ -24,47 +22,40 @@ data class Beer(
     val ingredients: Ingredients?,
     val foodPairing: List<String>?,
     val brewersTips: String?,
-    val contributedBy: String?
+    val contributedBy: String?,
 )
 
-@Immutable
 data class Volume(
     val value: Int,
     val unit: String,
 )
 
-@Immutable
 data class Method(
     val mashTemp: List<MethodItem>,
     val fermentation: Fermentation,
-    val twist: String?
+    val twist: String?,
 )
 
-@Immutable
 data class MethodItem(
     val temp: Value,
     val duration: Int?,
 )
 
-@Immutable
 data class Fermentation(
     val temp: Value,
 )
 
-@Immutable
 data class Value(
     val value: Double,
-    val unit: String
+    val unit: String,
 )
 
-@Immutable
 data class Ingredients(
     val malt: List<IngredientsItem>?,
     val hops: List<IngredientsItem>?,
-    val yeast: String?
+    val yeast: String?,
 )
 
-@Immutable
 data class IngredientsItem(
     val name: String,
     val amount: Value,

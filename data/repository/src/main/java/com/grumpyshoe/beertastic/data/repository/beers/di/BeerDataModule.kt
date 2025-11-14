@@ -1,18 +1,20 @@
+
 package com.grumpyshoe.beertastic.data.repository.beers.di
 
 import com.grumpyshoe.beertastic.data.repository.beers.repository.BeerRepositoryImpl
+import com.grumpyshoe.beertastic.data.source.network.di.NetworkModule
+import com.grumpyshoe.beertastic.data.source.preferences.di.SharedPreferencesModule
 import com.grumpyshoe.beertastic.domain.beer.repository.BeerRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import org.koin.core.module.Module
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object BeerDataModule {
-
-    @Provides
-    fun providesBeerRepository(repository: BeerRepositoryImpl): BeerRepository {
-        return repository
+val BeerDataModule =
+    buildList {
+        add(
+            module {
+              single<BeerRepository> { BeerRepositoryImpl(get(), get()) }
+            },
+        )
+        addAll(NetworkModule)
+        add(SharedPreferencesModule)
     }
-}

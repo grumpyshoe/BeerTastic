@@ -1,3 +1,4 @@
+
 package com.grumpyshoe.beertastic.domain.beer.usecase
 
 import kotlinx.coroutines.flow.Flow

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.BeerTastic" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowSplashScreenBackground">@color/background</item>
-        <!--Removes default splash icon on Android versions 31+ -->
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_placeholder_icon</item>
-    </style>
-</resources>
