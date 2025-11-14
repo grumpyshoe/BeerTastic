@@ -92,7 +92,7 @@ The should start on click `Run` in **Android Studio**. There is no API-Key neede
 You can now explore the app on an emulator or physical device (API level 26+).
 
 ---
-### Run unit tests
+### 🧪 Run unit tests
 ```bash
 ./gradlew testDebug
 ```
