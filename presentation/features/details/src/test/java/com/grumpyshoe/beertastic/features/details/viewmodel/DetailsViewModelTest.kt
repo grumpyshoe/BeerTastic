@@ -43,13 +43,12 @@ class DetailsViewModelTest {
             getBeerById = getBeerById,
             ioDispatcher = testDispatcher,
             isBeerFavorite = isBeerFavorite,
-            setIsBeerFavorite = setIsBeerFavorite
+            setIsBeerFavorite = setIsBeerFavorite,
         )
     }
 
     @Test
     fun `on init - with beer id - correct id is requested`() {
-
         // define test data
         getBeerById.result = ApiSuccess(fakeBeer)
 
@@ -62,7 +61,6 @@ class DetailsViewModelTest {
 
     @Test
     fun `beerDetailsDataState - on data available - is mapped correctly`() {
-
         // define test data
         getBeerById.result = ApiSuccess(fakeBeer)
 
@@ -76,7 +74,6 @@ class DetailsViewModelTest {
 
     @Test
     fun `beerDetailsDataState - on error - is mapped correctly`() {
-
         // define test data
         getBeerById.result = ApiError("DummyError")
 
@@ -90,7 +87,6 @@ class DetailsViewModelTest {
 
     @Test
     fun `isFavorite - on not favorite beer - is false`() {
-
         // define test data
         isBeerFavorite.result = false
 
@@ -105,7 +101,6 @@ class DetailsViewModelTest {
 
     @Test
     fun `isFavorite - on favorite - is true`() {
-
         // define test data
         isBeerFavorite.result = true
 

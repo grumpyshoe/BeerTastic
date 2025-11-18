@@ -46,13 +46,12 @@ class HomeViewModelTest {
             getBeerById = getBeerById,
             getFavorites = getFavorites,
             getRandomBeer = getRandomBeer,
-            ioDispatcher = testDispatcher
+            ioDispatcher = testDispatcher,
         )
     }
 
     @Test
     fun `viewState - on data available - has correct state`() {
-
         // define test data
         getBeers.result = ApiSuccess((0..3).map { getFakeBeer(it) })
 
@@ -66,7 +65,6 @@ class HomeViewModelTest {
 
     @Test
     fun `beerList - on data available - has correct data length`() {
-
         // define test data
         getBeers.result = ApiSuccess((0..2).map { getFakeBeer(it) })
 
@@ -80,7 +78,6 @@ class HomeViewModelTest {
 
     @Test
     fun `beerList - on data available - mapped data correctly`() {
-
         // define test data
         getBeers.result = ApiSuccess(
             listOf(
@@ -90,9 +87,9 @@ class HomeViewModelTest {
                     tagline = "tag 1",
                     firstBrewed = "2012-05-14",
                     description = "dummy description",
-                    imageUrl = "dummy image url"
-                )
-            )
+                    imageUrl = "dummy image url",
+                ),
+            ),
         )
 
         // init viewModel
@@ -109,14 +106,13 @@ class HomeViewModelTest {
 
     @Test
     fun `beerList - on data available - shorten description to 50 chars + ellipsis`() {
-
         // define test data
         getBeers.result = ApiSuccess(
             listOf(
                 fakeBeer.copy(
-                    description = (0..100).joinToString(separator = "") { "a" }
-                )
-            )
+                    description = (0..100).joinToString(separator = "") { "a" },
+                ),
+            ),
         )
 
         // init viewModel
@@ -129,7 +125,6 @@ class HomeViewModelTest {
 
     @Test
     fun `viewState - on error - is set correctly`() {
-
         // define test data
         getBeers.result = ApiError("DummyError")
 
@@ -143,7 +138,6 @@ class HomeViewModelTest {
 
     @Test
     fun `request page - on init - is 1`() {
-
         // define test data
         getBeers.result = ApiSuccess(listOf(fakeBeer))
 
@@ -156,7 +150,6 @@ class HomeViewModelTest {
 
     @Test
     fun `requested page - on loadMoreData - is increased by 1`() {
-
         // define test data
         getBeers.result = ApiSuccess(listOf(fakeBeer))
 
@@ -172,7 +165,6 @@ class HomeViewModelTest {
 
     @Test
     fun `beerList - on favorites available - doesn't contain duplicates`() {
-
         // define test data
         getBeers.result = ApiSuccess((0..2).map { getFakeBeer(it) })
         getFavorites.result = listOf(fakeBeer.id)
@@ -188,7 +180,6 @@ class HomeViewModelTest {
 
     @Test
     fun `favorites - on favorites available - contains correct data`() {
-
         // define test data
         getFavorites.result = listOf(fakeBeer.id)
 
@@ -203,7 +194,6 @@ class HomeViewModelTest {
 
     @Test
     fun `randomBeer - on init - is null`() {
-
         // init viewModel
         initViewModel()
 
@@ -214,7 +204,6 @@ class HomeViewModelTest {
 
     @Test
     fun `randomBeer - on request beer - contains correct data`() {
-
         // define test data
         getRandomBeer.result = ApiSuccess(fakeBeer)
 
@@ -231,7 +220,6 @@ class HomeViewModelTest {
 
     @Test
     fun `randomBeer - on delete random selection - data is removed`() {
-
         // define test data
         getRandomBeer.result = ApiSuccess(fakeBeer)
 

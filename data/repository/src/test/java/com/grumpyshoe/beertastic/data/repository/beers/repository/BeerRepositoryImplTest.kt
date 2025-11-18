@@ -30,13 +30,12 @@ class BeerRepositoryImplTest {
     private fun initViewModel() {
         sut = BeerRepositoryImpl(
             beerRemoteDatasource = beerRemoteDatasource,
-            sharedPreferenceService = sharedPreferenceService
+            sharedPreferenceService = sharedPreferenceService,
         )
     }
 
     @Test
     fun `getBeerById - on ApiSuccess - data are mapped correct`() {
-
         // define test data
         val beerDto = getFakeBeerDto(0)
         beerRemoteDatasource.result = ApiSuccess(listOf(beerDto))
@@ -81,7 +80,6 @@ class BeerRepositoryImplTest {
 
     @Test
     fun `getBeerById - on ApiError - data are mapped correct`() {
-
         // define test data
         val errorMsg = "DummyError"
         beerRemoteDatasource.result = ApiError(errorMsg)
@@ -102,11 +100,10 @@ class BeerRepositoryImplTest {
 
     @Test
     fun `getBeers - on ApiSuccess - data are mapped correct`() {
-
         // define test data
         val beerDtoList = listOf(
             getFakeBeerDto(0),
-            getFakeBeerDto(15)
+            getFakeBeerDto(15),
         )
         beerRemoteDatasource.result = ApiSuccess(beerDtoList)
 
@@ -128,7 +125,6 @@ class BeerRepositoryImplTest {
 
     @Test
     fun `getBeers - on ApiError - data are mapped correct`() {
-
         // define test data
         val errorMsg = "DummyError"
         beerRemoteDatasource.result = ApiError(errorMsg)
@@ -149,7 +145,6 @@ class BeerRepositoryImplTest {
 
     @Test
     fun `getFavorites - on data available - mapped data correct`() {
-
         // define test data
         val beerDtoList = listOf(5, 8, 9)
         sharedPreferenceService.favoritesResult = beerDtoList

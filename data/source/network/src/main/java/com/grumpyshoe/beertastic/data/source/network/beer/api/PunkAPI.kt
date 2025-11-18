@@ -10,15 +10,10 @@ import retrofit2.http.Query
 interface PunkAPI {
 
     @GET("beers")
-    suspend fun getBeers(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int = 80,
-    ): Response<List<BeerDto>>
+    suspend fun getBeers(@Query("page") page: Int, @Query("per_page") perPage: Int = 80): Response<List<BeerDto>>
 
     @GET("beers/{beerId}")
-    suspend fun getBeerById(
-        @Path("beerId") beerId: Int,
-    ): Response<BeerDto>
+    suspend fun getBeerById(@Path("beerId") beerId: Int): Response<BeerDto>
 
     @GET("beers/random")
     suspend fun getRandomBeer(): Response<BeerDto>

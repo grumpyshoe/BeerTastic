@@ -6,9 +6,7 @@ import androidx.core.content.edit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class SharedPreferenceServiceImpl(
-    private val encryptedSharedPrefs: SharedPreferences,
-) : SharedPreferenceService {
+class SharedPreferenceServiceImpl(private val encryptedSharedPrefs: SharedPreferences) : SharedPreferenceService {
     private val _favorites = MutableStateFlow(getFavorites())
     override val favorites: StateFlow<List<Int>> = _favorites
 
@@ -20,10 +18,7 @@ class SharedPreferenceServiceImpl(
             favorites?.split(",")?.contains(beerId.toString()) ?: false
         }
 
-    override fun setIsBeerFavorite(
-        beerId: Int,
-        isFavorite: Boolean,
-    ) {
+    override fun setIsBeerFavorite(beerId: Int, isFavorite: Boolean) {
         val favoriteList = getFavorites().toMutableList()
 
         val updatedList =

@@ -6,9 +6,7 @@ import com.grumpyshoe.beertastic.data.source.network.beer.model.BeerDto
 import com.grumpyshoe.beertastic.data.source.network.handleApi
 import com.grumpyshoe.beertastic.domain.beer.utils.ApiResult
 
-class BeerRemoteDatasourceImpl(
-    private val api: PunkAPI,
-) : BeerRemoteDatasource {
+class BeerRemoteDatasourceImpl(private val api: PunkAPI) : BeerRemoteDatasource {
     override suspend fun getBeers(page: Int): ApiResult<List<BeerDto>> = handleApi { api.getBeers(page = page) }
 
     override suspend fun getBeerById(beerId: Int): ApiResult<BeerDto> = handleApi {

@@ -157,7 +157,7 @@ val lightColors by lazy {
             surfaceContainerHigh = surfaceContainerHighLight,
             surfaceContainerHighest = surfaceContainerHighestLight,
         ),
-        customColor1 = Color.Magenta
+        customColor1 = Color.Magenta,
     )
 }
 
@@ -200,7 +200,7 @@ val darkColors by lazy {
             surfaceContainerHigh = surfaceContainerHighDark,
             surfaceContainerHighest = surfaceContainerHighestDark,
         ),
-        customColor1 = Color.Red
+        customColor1 = Color.Red,
     )
 }
 
@@ -211,13 +211,7 @@ internal val LocalColors =
 @Composable
 private fun ThemeColorsPreview() {
     @Composable
-    fun ColorEntry(
-        title: String,
-        light: Color,
-        onLight: Color?,
-        dark: Color?,
-        onDark: Color?,
-    ) {
+    fun ColorEntry(title: String, light: Color, onLight: Color?, dark: Color?, onDark: Color?) {
         Row(
             modifier = Modifier.padding(4.dp),
             verticalAlignment = Alignment.CenterVertically,

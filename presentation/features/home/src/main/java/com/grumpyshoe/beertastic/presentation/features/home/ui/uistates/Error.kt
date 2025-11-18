@@ -19,7 +19,7 @@ import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppTheme
 
 @Composable
-internal fun ErrorState() {
+internal fun Error() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -42,7 +42,7 @@ internal fun ErrorState() {
 private fun ErrorComponentPreview() {
     AppTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            ErrorState()
+            Error()
         }
     }
 }

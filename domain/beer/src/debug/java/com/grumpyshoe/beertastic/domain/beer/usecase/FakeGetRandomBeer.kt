@@ -9,7 +9,5 @@ class FakeGetRandomBeer : GetRandomBeer {
 
     var result: ApiResult<Beer> = ApiSuccess(fakeBeer)
 
-    override suspend fun invoke(): ApiResult<Beer> {
-        return result
-    }
+    override suspend fun invoke(): ApiResult<Beer> = result
 }

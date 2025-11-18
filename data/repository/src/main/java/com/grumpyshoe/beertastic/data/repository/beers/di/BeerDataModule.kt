@@ -12,7 +12,7 @@ val BeerDataModule =
     buildList {
         add(
             module {
-              single<BeerRepository> { BeerRepositoryImpl(get(), get()) }
+                single<BeerRepository> { BeerRepositoryImpl(get(), get()) }
             },
         )
         addAll(NetworkModule)

@@ -34,7 +34,6 @@ fun AppTheme(
         LocalTypography provides typography,
         LocalColors provides colors,
     ) {
-
         val view = LocalView.current
         if (!view.isInEditMode) {
             SideEffect {

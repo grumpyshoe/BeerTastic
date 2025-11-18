@@ -3,13 +3,9 @@ package com.grumpyshoe.beertastic.domain.beer.utils
 
 sealed interface ApiResult<out T>
 
-data class ApiSuccess<out T>(
-    val data: T,
-) : ApiResult<T>
+data class ApiSuccess<out T>(val data: T) : ApiResult<T>
 
-data class ApiError<out T>(
-    val msg: String?,
-) : ApiResult<T>
+data class ApiError<out T>(val msg: String?) : ApiResult<T>
 
 inline fun <T> ApiResult<T>.onSuccess(action: (T) -> Unit): ApiResult<T> {
     if (this is ApiSuccess) {

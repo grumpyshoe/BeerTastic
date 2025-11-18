@@ -32,19 +32,16 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppTheme
-import com.grumpyshoe.beertastic.presentation.features.splashscreen.state.SplashState
-import com.grumpyshoe.beertastic.presentation.features.splashscreen.viewmodel.SplashViewModel
+import com.grumpyshoe.beertastic.presentation.features.splashscreen.state.SplashScreenState
+import com.grumpyshoe.beertastic.presentation.features.splashscreen.viewmodel.SplashScreenViewModel
 import org.koin.compose.koinInject
 
 @Composable
-fun SplashscreenRoot(
-    viewModel: SplashViewModel = koinInject(),
-    navigateForward: () -> Unit,
-) {
+fun SplashScreenRoot(viewModel: SplashScreenViewModel = koinInject(), navigateForward: () -> Unit) {
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(state) {
-        if (state is SplashState.Navigate) {
+        if (state is SplashScreenState.Navigate) {
             navigateForward()
         }
     }

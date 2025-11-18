@@ -22,7 +22,7 @@ spotless {
         )
         ktlint("1.7.1").editorConfigOverride(
             mapOf(
-                "ktlint_function_naming_ignore_when_annotated_with" to "Composable"
+                "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
             )
         )
         trimTrailingWhitespace()

@@ -52,7 +52,7 @@ import com.grumpyshoe.beertastic.presentation.features.home.ui.uimodel.BeerUIIte
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun BeerListState(
+fun Dashboard(
     favorites: List<BeerUIItem>?,
     beerList: List<BeerUIItem>,
     loadMoreData: () -> Unit,
@@ -226,7 +226,7 @@ private fun SectionHeadline(@StringRes text: Int) {
 private fun BeerListComponentPreview() {
     AppTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            BeerListState(
+            Dashboard(
                 favorites = listOf(
                     BeerUIItem(
                         id = 3,

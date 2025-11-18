@@ -5,7 +5,7 @@ import com.grumpyshoe.beertastic.data.repository.beers.di.BeerDataModule
 import com.grumpyshoe.beertastic.domain.beer.di.BeerDomainModule
 import com.grumpyshoe.beertastic.presentation.features.details.viewmodel.DetailsViewModel
 import com.grumpyshoe.beertastic.presentation.features.home.viewmodel.HomeViewModel
-import com.grumpyshoe.beertastic.presentation.features.splashscreen.viewmodel.SplashViewModel
+import com.grumpyshoe.beertastic.presentation.features.splashscreen.viewmodel.SplashScreenViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -21,15 +21,15 @@ class AppApplication : Application() {
             androidContext(this@AppApplication)
             modules(
                 BeerDomainModule +
-                        BeerDataModule +
-                        appModule,
+                    BeerDataModule +
+                    appModule,
             )
         }
     }
 
     val appModule = module {
         single<CoroutineDispatcher> { Dispatchers.IO }
-        viewModelOf(::SplashViewModel)
+        viewModelOf(::SplashScreenViewModel)
         viewModelOf(::HomeViewModel)
         viewModelOf(::DetailsViewModel)
     }

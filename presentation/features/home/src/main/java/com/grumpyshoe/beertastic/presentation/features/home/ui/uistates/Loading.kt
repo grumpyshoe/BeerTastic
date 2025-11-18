@@ -23,7 +23,7 @@ import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppTheme
 
 @Composable
-internal fun LoadingState() {
+internal fun Loading() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -55,7 +55,7 @@ internal fun LoadingState() {
 private fun LoadingComponentPreview() {
     AppTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-            LoadingState()
+            Loading()
         }
     }
 }

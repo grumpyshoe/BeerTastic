@@ -40,10 +40,7 @@ class BeerRepositoryImpl(
 
     override suspend fun checkIfFavorite(beerId: Int): Boolean = sharedPreferenceService.checkIfFavorite(beerId)
 
-    override suspend fun setIsBeerFavorite(
-        beerId: Int,
-        isFavorite: Boolean,
-    ) {
+    override suspend fun setIsBeerFavorite(beerId: Int, isFavorite: Boolean) {
         sharedPreferenceService.setIsBeerFavorite(
             beerId = beerId,
             isFavorite = isFavorite,

@@ -203,10 +203,7 @@ private fun BeerSuggestion(
 }
 
 @Composable
-private fun DiscoverCard(
-    showRandomBeer: () -> Unit,
-    updateLoading: (Boolean) -> Unit,
-) {
+private fun DiscoverCard(showRandomBeer: () -> Unit, updateLoading: (Boolean) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(24.dp),

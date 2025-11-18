@@ -25,40 +25,16 @@ data class Beer(
     val contributedBy: String?,
 )
 
-data class Volume(
-    val value: Int,
-    val unit: String,
-)
+data class Volume(val value: Int, val unit: String)
 
-data class Method(
-    val mashTemp: List<MethodItem>,
-    val fermentation: Fermentation,
-    val twist: String?,
-)
+data class Method(val mashTemp: List<MethodItem>, val fermentation: Fermentation, val twist: String?)
 
-data class MethodItem(
-    val temp: Value,
-    val duration: Int?,
-)
+data class MethodItem(val temp: Value, val duration: Int?)
 
-data class Fermentation(
-    val temp: Value,
-)
+data class Fermentation(val temp: Value)
 
-data class Value(
-    val value: Double,
-    val unit: String,
-)
+data class Value(val value: Double, val unit: String)
 
-data class Ingredients(
-    val malt: List<IngredientsItem>?,
-    val hops: List<IngredientsItem>?,
-    val yeast: String?,
-)
+data class Ingredients(val malt: List<IngredientsItem>?, val hops: List<IngredientsItem>?, val yeast: String?)
 
-data class IngredientsItem(
-    val name: String,
-    val amount: Value,
-    val add: String? = null,
-    val attribute: String? = null,
-)
+data class IngredientsItem(val name: String, val amount: Value, val add: String? = null, val attribute: String? = null)

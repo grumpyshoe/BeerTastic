@@ -12,7 +12,7 @@ import com.grumpyshoe.beertastic.presentation.features.details.ui.DetailsRoot
 import com.grumpyshoe.beertastic.presentation.features.home.navigation.HomeNavKey
 import com.grumpyshoe.beertastic.presentation.features.home.ui.HomeRoot
 import com.grumpyshoe.beertastic.presentation.features.splashscreen.navigation.SplashscreenNavKey
-import com.grumpyshoe.beertastic.presentation.features.splashscreen.ui.SplashscreenRoot
+import com.grumpyshoe.beertastic.presentation.features.splashscreen.ui.SplashScreenRoot
 
 @Composable
 fun NavigationRoot(modifier: Modifier = Modifier) {
@@ -31,7 +31,7 @@ fun NavigationRoot(modifier: Modifier = Modifier) {
                     NavEntry(
                         key = key,
                         content = {
-                            SplashscreenRoot(
+                            SplashScreenRoot(
                                 navigateForward = {
                                     backStack.add(HomeNavKey)
                                     backStack.removeFirstOrNull()

@@ -19,9 +19,9 @@ import com.grumpyshoe.beertastic.common.resources.R
 import com.grumpyshoe.beertastic.common.resources.ui.theme.AppTheme
 import com.grumpyshoe.beertastic.presentation.features.home.ui.uimodel.BeerDataState
 import com.grumpyshoe.beertastic.presentation.features.home.ui.uimodel.BeerUIItem
-import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.BeerListState
-import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.ErrorState
-import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.LoadingState
+import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.Dashboard
+import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.Error
+import com.grumpyshoe.beertastic.presentation.features.home.ui.uistates.Loading
 import com.grumpyshoe.beertastic.presentation.features.home.viewmodel.HomeViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -76,9 +76,9 @@ private fun HomeScreen(
 
         Box(modifier = Modifier.padding(paddingValues)) {
             when (beerDataState) {
-                is BeerDataState.Loading -> LoadingState()
-                is BeerDataState.Error -> ErrorState()
-                is BeerDataState.DataLoaded -> BeerListState(
+                is BeerDataState.Loading -> Loading()
+                is BeerDataState.Error -> Error()
+                is BeerDataState.DataLoaded -> Dashboard(
                     favorites = favorites,
                     beerList = beerList,
                     loadMoreData = loadMoreData,

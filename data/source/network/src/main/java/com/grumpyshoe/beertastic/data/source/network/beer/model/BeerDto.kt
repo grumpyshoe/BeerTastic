@@ -27,10 +27,7 @@ data class BeerDto(
     @SerializedName("contributed_by") val contributedBy: String? = null,
 )
 
-data class VolumeDto(
-    val value: Int? = null,
-    val unit: String? = null,
-)
+data class VolumeDto(val value: Int? = null, val unit: String? = null)
 
 data class MethodDto(
     @SerializedName("mash_temp") val mashTemp: List<MethodItemDto>? = null,
@@ -38,19 +35,11 @@ data class MethodDto(
     val twist: String? = null,
 )
 
-data class MethodItemDto(
-    val temp: ValueDto? = null,
-    val duration: Int? = null,
-)
+data class MethodItemDto(val temp: ValueDto? = null, val duration: Int? = null)
 
-data class FermentationDto(
-    val temp: ValueDto? = null,
-)
+data class FermentationDto(val temp: ValueDto? = null)
 
-data class ValueDto(
-    val value: Double? = null,
-    val unit: String? = null,
-)
+data class ValueDto(val value: Double? = null, val unit: String? = null)
 
 data class IngredientsDto(
     val malt: List<IngredientsItemDto>? = null,
