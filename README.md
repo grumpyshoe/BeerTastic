@@ -29,7 +29,8 @@ It serves as a practical example of modern Android development with **Jetpack Co
 
 ## 🍻 App Overview
 
-The app fetches data from the [Punk API](https://punkapi.com/documentation/v2) to display a variety of beers.
+The app retrieves beer data from https://punkapi-alxiw.amvera.io/v3, a maintained fork of the official [Punk API](https://punkapi.com/documentation/v2) to display a variety of beers.  
+This fork is used because the original API experiences frequent downtime and is often unavailable.
 
 ### ✨ Features
 - Infinite scrolling beer list on the home screen
@@ -80,7 +81,6 @@ The UI is fully built with **Jetpack Compose**.
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/grumpyshoe/BeerTastic.git
-cd BeerTastic
 ```
 
 ### 2. Open the project

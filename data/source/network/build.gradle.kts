@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         configureEach {
-            buildConfigField("String", "BASE_URL", "\"https://punkapi.online/v3/\"")
+            buildConfigField("String", "BASE_URL", "\"https://punkapi-alxiw.amvera.io/v3/\"")
         }
     }
 
